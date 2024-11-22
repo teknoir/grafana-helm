@@ -1,0 +1,21 @@
+# Values needed for Grafana
+
+deviceId: "test-device"
+teamspace: "test-teamspace"
+domain: "teknoir.cloud"
+dashboards:
+  enable: false
+  custom: {}
+
+annotations:
+  teknoir.org/managed-by: devstudio
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 10m
+    memory: 50Mi
+nodePort:
+  enabled: false
+  nodePort: 31300

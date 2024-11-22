@@ -1,0 +1,89 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: grafana
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: grafana
+      annotations:
+        {{- toYaml $.Values.annotations | nindent 8 }}
+    spec:
+      securityContext:
+        fsGroup: 472
+        runAsGroup: 472
+        runAsUser: 472
+      initContainers:
+        - name: change-ownership-container
+          image: busybox
+          command: [ "/bin/chown","-R","472:472", "/var/lib/grafana" ]
+          securityContext:
+            runAsUser: 0
+            privileged: true
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/grafana
+      containers:
+        - name: grafana
+          image: grafana/grafana-oss:latest
+          imagePullPolicy: Always
+          env:
+            - name: GF_INSTALL_PLUGINS
+              value: ""
+          volumeMounts:
+            - name: storage
+              mountPath: "/var/lib/grafana"
+            - name: config
+              mountPath: "/etc/grafana/grafana.ini"
+              subPath: grafana.ini
+            - name: provisioning
+              mountPath: "/etc/grafana/provisioning/datasources/datasources.yaml"
+              subPath: datasources.yaml
+            - name: provisioning
+              mountPath: "/etc/grafana/provisioning/dashboards/dashboards.yaml"
+              subPath: dashboards.yaml
+            - name: dashboards
+              mountPath: "/etc/grafana/dashboards"
+            {{- if .Values.dashboards.enable }}
+            - name: custom-dashboards
+              mountPath: "/etc/grafana/custom_dashboards"
+            {{- end }}
+          ports:
+            - name: service
+              containerPort: 80
+              protocol: TCP
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+      volumes:
+        - name: storage
+          hostPath:
+            path: /opt/teknoir/grafana/data
+            type: DirectoryOrCreate
+        - name: config
+          configMap:
+            name: grafana-config
+        - name: provisioning
+          configMap:
+            name: grafana-provisioning
+        - name: dashboards
+          configMap:
+            name: grafana-dashboards
+        {{- if .Values.dashboards.enable }}
+        - name: custom-dashboards
+          configMap:
+            name: grafana-custom-dashboards
+        {{- end }}

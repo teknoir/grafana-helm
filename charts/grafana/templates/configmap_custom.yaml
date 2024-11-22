@@ -1,0 +1,14 @@
+{{- if .Values.dashboards.enable }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-custom-dashboards
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: grafana
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+data:
+  {{- toYaml .Values.dashboards.custom | nindent 2 }}
+{{- end }}
