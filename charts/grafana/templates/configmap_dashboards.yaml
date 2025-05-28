@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-  "id": 3,
+      "id": 3,
       "links": [],
       "panels": [
         {
@@ -435,9 +435,9 @@ data:
           "type": "timeseries"
         }
       ],
-  "preload": false,
+      "preload": false,
       "refresh": "10s",
-  "schemaVersion": 40,
+      "schemaVersion": 40,
       "tags": [],
       "templating": {
         "list": []
