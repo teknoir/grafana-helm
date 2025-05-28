@@ -117,7 +117,7 @@ data:
             {
               "editorMode": "code",
           "expr": "sum by (camera) (increase(nvr_camera_dropped_frames[$__rate_interval]))",
-          "legendFormat": "{{camera}}",
+          "legendFormat": "{{ "{{camera}}" }}",
               "range": true,
               "refId": "A"
             }
@@ -219,7 +219,7 @@ data:
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-          "legendFormat": "{{camera}}",
+          "legendFormat": "{{ "{{camera}}" }}",
               "range": true,
               "refId": "A",
               "useBackend": false
@@ -322,7 +322,7 @@ data:
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-          "legendFormat": "{{camera}}",
+          "legendFormat": "{{ "{{camera}}" }}",
               "range": true,
               "refId": "A",
               "useBackend": false
@@ -425,7 +425,7 @@ data:
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-          "legendFormat": "{{camera}}",
+          "legendFormat": "{{ "{{camera}}" }}",
               "range": true,
               "refId": "A",
               "useBackend": false
