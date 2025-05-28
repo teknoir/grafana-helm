@@ -30,7 +30,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 2,
+  "id": 3,
       "links": [],
       "panels": [
         {
@@ -41,7 +41,40 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
               },
               "mappings": [],
               "thresholds": {
@@ -56,137 +89,41 @@ data:
                     "value": 80
                   }
                 ]
-              },
-              "unit": "short"
+          }
             },
             "overrides": []
           },
           "gridPos": {
-            "h": 9,
-            "w": 4,
+        "h": 10,
+        "w": 24,
             "x": 0,
             "y": 0
           },
-          "id": 4,
+      "id": 9,
           "options": {
-            "colorMode": "value",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "percentChangeColorMode": "standard",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
             },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
           },
           "pluginVersion": "",
           "targets": [
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
               "editorMode": "code",
-              "expr": "count(up{app=~\".*nvr.*\"})",
-              "instant": false,
-              "interval": "",
-              "legendFormat": "{{ "{{app}}" }}",
+          "expr": "sum by (camera) (increase(nvr_camera_dropped_frames[$__rate_interval]))",
+          "legendFormat": "{{camera}}",
               "range": true,
               "refId": "A"
             }
           ],
-          "title": "Cameras",
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "cellOptions": {
-                  "type": "auto"
-                },
-                "filterable": false,
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 9,
-            "w": 8,
-            "x": 4,
-            "y": 0
-          },
-          "id": 6,
-          "options": {
-            "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "showHeader": true
-          },
-          "pluginVersion": "",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "expr": "topk(6, sum by (name) (app_restarts{name=~\".*nvr.*\"}))",
-              "format": "table",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "",
-              "refId": "A"
-            }
-          ],
-          "title": "Camera Restarts",
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "Time": true
-                },
-                "indexByName": {},
-                "renameByName": {}
-              }
-            }
-          ],
-          "type": "table"
+      "title": "Dropped Frames",
+      "type": "timeseries"
         },
         {
           "datasource": {
@@ -207,7 +144,7 @@ data:
                 "barAlignment": 0,
                 "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 90,
+            "fillOpacity": 50,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -250,12 +187,12 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 12,
-            "y": 0
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 10
           },
-          "id": 7,
+      "id": 2,
           "options": {
             "legend": {
               "calcs": [],
@@ -277,18 +214,18 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "sum by(camera) (nvr_camera_pipeline_errors)",
+          "editorMode": "code",
+          "expr": "sum by(camera) (rate(nvr_camera_frames_produced[5m]))",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-              "legendFormat": "{{ "{{camera}}" }}",
+          "legendFormat": "{{camera}}",
               "range": true,
               "refId": "A",
               "useBackend": false
             }
           ],
-          "title": "Errors Count Per Camera",
+      "title": "FPS Per Camera",
           "type": "timeseries"
         },
         {
@@ -310,7 +247,7 @@ data:
                 "barAlignment": 0,
                 "barWidthFactor": 0.6,
                 "drawStyle": "line",
-                "fillOpacity": 50,
+            "fillOpacity": 90,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -353,12 +290,12 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 10,
-            "w": 12,
+        "h": 9,
+        "w": 24,
             "x": 0,
-            "y": 9
+        "y": 20
           },
-          "id": 2,
+      "id": 7,
           "options": {
             "legend": {
               "calcs": [],
@@ -380,18 +317,18 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "disableTextWrap": false,
-              "editorMode": "builder",
-              "expr": "sum by(camera) (rate(nvr_camera_frames_produced[5m]))",
+          "editorMode": "code",
+          "expr": "sum by(camera) (increase(nvr_camera_pipeline_errors[$__rate_interval]))",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-              "legendFormat": "{{ "{{camera}}" }}",
+          "legendFormat": "{{camera}}",
               "range": true,
               "refId": "A",
               "useBackend": false
             }
           ],
-          "title": "FPS Per Camera",
+      "title": "Errors Count Per Camera",
           "type": "timeseries"
         },
         {
@@ -457,9 +394,9 @@ data:
           },
           "gridPos": {
             "h": 10,
-            "w": 12,
-            "x": 12,
-            "y": 9
+        "w": 24,
+        "x": 0,
+        "y": 29
           },
           "id": 8,
           "options": {
@@ -484,11 +421,11 @@ data:
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "sum by(camera) (rate(nvr_camera_pipeline_eos[$__rate_interval]))",
+          "expr": "sum by(camera) (increase(nvr_camera_pipeline_eos[$__rate_interval]))",
               "fullMetaSearch": false,
               "includeNullMetadata": true,
               "interval": "",
-              "legendFormat": "{{ "{{camera}}" }}",
+          "legendFormat": "{{camera}}",
               "range": true,
               "refId": "A",
               "useBackend": false
@@ -498,8 +435,9 @@ data:
           "type": "timeseries"
         }
       ],
+  "preload": false,
       "refresh": "10s",
-      "schemaVersion": 39,
+  "schemaVersion": 40,
       "tags": [],
       "templating": {
         "list": []
