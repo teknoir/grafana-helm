@@ -32,6 +32,8 @@ data:
     enabled = true
     org_role = Editor
     hide_version = true
+    [auth.grafanacom]
+    enabled = false
     [analytics]
     check_for_updates = false
     reporting_enabled = false
