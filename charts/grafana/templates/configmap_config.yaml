@@ -34,8 +34,6 @@ data:
     org_role = Editor
     org_name = Teknoir
     hide_version = true
-    [auth.google]
-    enabled = false
     [analytics]
     check_for_updates = false
     reporting_enabled = false
