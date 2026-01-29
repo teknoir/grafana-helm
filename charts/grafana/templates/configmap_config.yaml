@@ -31,13 +31,12 @@ data:
     [auth.anonymous]
     enabled = true
     org_role = Editor
-    org_name = Teknoir
     hide_version = true
     [analytics]
     check_for_updates = false
     reporting_enabled = false
     [grafana_net]
-    url = {{ $.Values.domain }}
+    url = https://{{ $.Values.domain }}
     [log]
     mode = console
     level = debug
