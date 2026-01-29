@@ -25,7 +25,6 @@ data:
     allow_embedding = true
     [users]
     default_theme = dark
-    disable_user_password_change = true
     [auth]
     disable_login_form = true
     disable_signout_menu = true
