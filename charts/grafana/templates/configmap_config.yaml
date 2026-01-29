@@ -25,13 +25,19 @@ data:
     allow_embedding = true
     [users]
     default_theme = dark
+    disable_user_password_change = true
     [auth]
     disable_login_form = true
     disable_signout_menu = true
     [auth.anonymous]
     enabled = true
-    org_role = Editor
+    org_role = Admin
+    org_name = Teknoir
     hide_version = true
+    [auth.grafanacom]
+    enabled = false
+    [auth.google]
+    enabled = false
     [analytics]
     check_for_updates = false
     reporting_enabled = false
