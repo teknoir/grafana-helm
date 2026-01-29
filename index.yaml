@@ -3,6 +3,16 @@ entries:
   grafana:
   - apiVersion: v2
     appVersion: 11.3.1
+    created: "2026-01-29T08:31:37.739467389Z"
+    description: A Helm chart for Grafana
+    digest: b5c6711a2c39ed461037d77fe55a32573ac043a2c2eb4658197436460d8c5a20
+    name: grafana
+    type: application
+    urls:
+    - https://github.com/teknoir/grafana-helm/releases/download/grafana-0.0.6/grafana-0.0.6.tgz
+    version: 0.0.6
+  - apiVersion: v2
+    appVersion: 11.3.1
     created: "2025-05-28T11:52:55.292315498Z"
     description: A Helm chart for Grafana
     digest: d1e86ed21ee729665da94b171b45c65835c5606e9326ae7a8abf50320ccb347b
@@ -51,4 +61,4 @@ entries:
     urls:
     - https://github.com/teknoir/grafana-helm/releases/download/grafana-0.0.1/grafana-0.0.1.tgz
     version: 0.0.1
-generated: "2025-05-28T11:52:55.292334605Z"
+generated: "2026-01-29T08:31:37.739490968Z"
