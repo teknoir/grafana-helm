@@ -31,7 +31,7 @@ data:
     disable_signout_menu = true
     [auth.anonymous]
     enabled = true
-    org_role = Admin
+    org_role = Editor
     org_name = Teknoir
     hide_version = true
     [auth.grafanacom]
@@ -42,7 +42,7 @@ data:
     check_for_updates = false
     reporting_enabled = false
     [grafana_net]
-    url = https://grafana.net
+    url = {{ $.Values.domain }}
     [log]
     mode = console
     level = debug

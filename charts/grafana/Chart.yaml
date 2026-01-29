@@ -3,5 +3,5 @@ name: grafana
 description: A Helm chart for Grafana
 
 type: application
-version: 0.0.6
+version: 0.0.7
 appVersion: "11.3.1"
