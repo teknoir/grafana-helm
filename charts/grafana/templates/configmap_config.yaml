@@ -34,8 +34,6 @@ data:
     org_role = Editor
     org_name = Teknoir
     hide_version = true
-    [auth.grafanacom]
-    enabled = false
     [auth.google]
     enabled = false
     [analytics]
